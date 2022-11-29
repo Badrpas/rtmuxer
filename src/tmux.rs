@@ -38,16 +38,18 @@ impl Session {
             .output()?;
         let sessions: Vec<String> = cmd.stdout.into_str().split('\n').map(|s|s.to_string()).collect();
 
-        if !sessions.iter().any(|s|*s == self.name) {
+        let is_first = if !sessions.iter().any(|s|*s == self.name) {
             println!("Creating session [{}]", self.name);
             Command::new("tmux")
                 .arg("new-session")
                 .args(["-s", &self.name])
                 .arg("-d")
                 .status()?;
+            true
         } else {
-            println!("Session [{}] exists", self.name)
-        }
+            println!("Session [{}] exists", self.name);
+            false
+        };
 
         let cmd = Command::new("tmux")
             .arg("list-windows")
@@ -60,14 +62,16 @@ impl Session {
             window.sync(&self.name, &windows)?;
         }
 
-        for window_name in &windows {
-            if window_name.is_empty() { continue; }
-            if !self.windows.iter().any(|w|&w.name==window_name) {
-                println!("\tDeleting window [{window_name}] as its not needed");
-                Command::new("tmux")
-                    .arg("kill-window")
-                    .args(["-t", window_name])
-                    .status()?; 
+        if is_first {
+            for window_name in &windows {
+                if window_name.is_empty() { continue; }
+                if !self.windows.iter().any(|w|&w.name==window_name) {
+                    println!("\tDeleting window [{window_name}] as its not needed");
+                    Command::new("tmux")
+                        .arg("kill-window")
+                        .args(["-t", window_name])
+                        .status()?; 
+                }
             }
         }
     }
