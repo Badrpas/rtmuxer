@@ -1,0 +1,22 @@
+
+# Example config file.
+# Here we create two sessions.
+# One with docker containers and the other with tmux man page.
+
+
+docker: # session name
+
+  redis: # window name
+    cmd: docker run redis -e PWD=$REDIS_PASSWORD
+    env:
+      REDIS_PASSWORD: 123456
+
+  kafka: 
+    cmd: cd ~/path/to/kafka/compose && docker-compose up
+
+
+tmux-man:
+  manual:
+    cmd: man tmux
+
+
