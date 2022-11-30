@@ -12,14 +12,15 @@ mod errors;
 
 fn main() {
     let mut args = env::args();
-    args.next();
-    let config_path = args.next();
-    if config_path.is_none() {
-        println!("Provide a config file path.");
-        return;
-    }
+    args.next(); // Skip self
 
-    match std::fs::File::open(config_path.unwrap()) {
+    for config_path in args {
+        run(config_path);
+    }
+}
+
+fn run(config_path: String) {
+    match std::fs::File::open(config_path) {
         Err(err) => {
             println!("Error while reading config: {err}");
         }
