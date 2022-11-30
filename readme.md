@@ -1,6 +1,6 @@
 # rTMUXer
 
-Use `yaml` config to define sessions and windows layout.
+Use `yaml` config to define `tmux` sessions and windows layout.
 
 
 ### Example
