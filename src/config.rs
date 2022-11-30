@@ -33,7 +33,7 @@ impl From<Config> for Vec<Session> {
                     name,
                     cmd: w_conf.cmd,
                     keys: w_conf.keys,
-                    cwd: w_conf.cwd,
+                    cwd: w_conf.cwd.map(|v|shellexpand::tilde(&v).into()),
                     env: w_conf.env,
                 });
             }
@@ -42,4 +42,6 @@ impl From<Config> for Vec<Session> {
         sessions
     }
 }
+
+
 

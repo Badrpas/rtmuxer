@@ -17,6 +17,11 @@ docker: # session name
 
 tmux-man:
   manual:
+    cwd: ~/
     cmd: man tmux
 
+foo:
+  bar:
+    cwd: /
+    cmd: ls
 
