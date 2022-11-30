@@ -131,7 +131,7 @@ impl Window {
             }
 
         } else {
-            println!("  Window [{}] exists", self.name);
+            println!("\t\tWindow [{}] exists", self.name);
         }
     }
 }
