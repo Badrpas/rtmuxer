@@ -4,8 +4,10 @@ Use `yaml` config to define `tmux` sessions and windows layout.
 
 
 ### Example
-
+Define config file:
 ```yaml
+# server-conf.yaml
+
 # create a session named `foo`
 foo:
 
@@ -19,4 +21,7 @@ foo:
     env:
       PORT: 8080
 ```
-
+Run as:
+```shell
+$ rtmuxer server-conf.yaml
+```
