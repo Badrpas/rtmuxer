@@ -12,14 +12,25 @@ mod errors;
 
 fn main() {
     let mut args = env::args();
+
+    if args.len() == 1 {
+        const DEFAULT_FILE: &str = "rtmuxer.yaml";
+        if std::path::Path::new(DEFAULT_FILE).exists() {
+            run(DEFAULT_FILE);
+        } else {
+            println!("Provide a config file");
+            return;
+        }
+    }
+
     args.next(); // Skip self
 
     for config_path in args {
-        run(config_path);
+        run(&config_path);
     }
 }
 
-fn run(config_path: String) {
+fn run(config_path: &str) {
     match std::fs::File::open(config_path) {
         Err(err) => {
             println!("Error while reading config: {err}");

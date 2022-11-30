@@ -7,7 +7,10 @@ Use `yaml` config to define `tmux` sessions and windows layout.
 $ cargo install --git https://github.com/Badrpas/rtmuxer.git
 ```
 
-### Example
+### Usage
+
+##### Specific config file(s)
+
 Define config file:
 ```yaml
 # server-conf.yaml
@@ -25,7 +28,18 @@ foo:
     env:
       PORT: 8080
 ```
-Usage:
 ```shell
 $ rtmuxer server-conf.yaml
+```
+
+
+Filepath can be omitted if config named `rtmuxer.yaml` exists in current working directory:
+```yaml
+# rtmuxer.yaml
+hello:
+  world:
+    cmd: echo hi
+```
+```shell
+$ rtumxer
 ```
