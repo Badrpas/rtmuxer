@@ -9,7 +9,7 @@ $ cargo install --git https://github.com/Badrpas/rtmuxer.git
 
 ### Usage
 
-##### Specific config file(s)
+#### With specific config file(s):
 
 Define config file:
 ```yaml
@@ -31,7 +31,7 @@ foo:
 ```shell
 $ rtmuxer server-conf.yaml
 ```
-
+#### Implicitly use config in current dir:
 
 Filepath can be omitted if config named `rtmuxer.yaml` exists in current working directory:
 ```yaml
