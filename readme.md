@@ -3,6 +3,7 @@
 Use `yaml` config to define `tmux` sessions and windows layout.
 
 ### Install
+You can download binary from [latest release](https://github.com/Badrpas/rtmuxer/releases/latest) or install using cargo:
 ```shell
 $ cargo install --git https://github.com/Badrpas/rtmuxer.git
 ```
