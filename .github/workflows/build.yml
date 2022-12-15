@@ -16,7 +16,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: rtmuxer
-          path: target/
+          path: target/release/rtmuxer
 
   release:
     name: Release
