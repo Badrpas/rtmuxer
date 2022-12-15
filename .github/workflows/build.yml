@@ -18,6 +18,15 @@ jobs:
           name: rtmuxer
           path: target/release/rtmuxer
 
+  debug-action:
+    name: Debug action artifacts
+    needs: build
+    runs-on: ubuntu-latest
+    step:
+      - uses: actions/download-artifact@v3
+      - run: ls -R
+
+
   release:
     name: Release
     needs: build
@@ -25,6 +34,7 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - uses: actions/download-artifact@v3
+      - run: ls -R
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
