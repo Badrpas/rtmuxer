@@ -12,11 +12,12 @@ jobs:
         with:
           toolchain: stable
       - run: cargo build --release
+      - run: cd target/release && tar -czvf rtmuxer.tar.gz rtmuxer && cd ../..
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: rtmuxer
-          path: target/release/rtmuxer
+          path: target/release/rtmuxer.tar.gz
 
 
   release:
@@ -26,8 +27,8 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - uses: actions/download-artifact@v3
-      - run: tar -czvf rtmuxer.tar.gz rtmuxer
+      - run: ls -la -R
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: rtmuxer.tar.gz
+          files: rtmuxer/rtmuxer.tar.gz
