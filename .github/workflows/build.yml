@@ -22,7 +22,7 @@ jobs:
     name: Debug action artifacts
     needs: build
     runs-on: ubuntu-latest
-    step:
+    steps:
       - uses: actions/download-artifact@v3
       - run: ls -R
 
