@@ -26,8 +26,8 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - uses: actions/download-artifact@v3
-      - run: ls -R
+      - run: tar -czvf rtmuxer.tar.gz rtmuxer
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: rtmuxer/rtmuxer
+          files: rtmuxer.tar.gz
