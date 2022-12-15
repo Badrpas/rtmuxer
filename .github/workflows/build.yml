@@ -2,6 +2,7 @@
 on: push
 
 jobs:
+
   build:
     name: Build rTMUXer
     runs-on: ubuntu-latest
@@ -11,3 +12,17 @@ jobs:
         with:
           toolchain: stable
       - run: cargo build --release
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: rtmuxer
+          path: target/
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
