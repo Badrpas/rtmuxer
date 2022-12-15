@@ -26,3 +26,5 @@ jobs:
       - uses: actions/download-artifact@v3
       - name: Release
         uses: softprops/action-gh-release@v1
+        with:
+          files: rtmuxer
