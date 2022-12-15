@@ -3,7 +3,10 @@ name = "rtmuxer"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.release]
+opt-level = 's'  # Optimize for size.
+lto = true # Link Time Optimization (LTO)
+
 
 [dependencies]
 shellexpand = "2.1.2"

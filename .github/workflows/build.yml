@@ -11,13 +11,14 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: cargo build --release
-      - run: cd target/release && tar -czvf rtmuxer.tar.gz rtmuxer && cd ../..
+          target: x86_64-unknown-linux-musl
+      - run: RUSTFLAGS='-C link-arg=-s' cargo build --release --target x86_64-unknown-linux-musl
+      - run: cd target/x86_64-unknown-linux-musl/release && tar -czvf rtmuxer.tar.gz rtmuxer && cd ../../..
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: rtmuxer
-          path: target/release/rtmuxer.tar.gz
+          path: target/x86_64-unknown-linux-musl/release/rtmuxer.tar.gz
 
 
   release:
@@ -32,3 +33,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: rtmuxer/rtmuxer.tar.gz
+
