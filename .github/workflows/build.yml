@@ -18,14 +18,6 @@ jobs:
           name: rtmuxer
           path: target/release/rtmuxer
 
-  debug-action:
-    name: Debug action artifacts
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v3
-      - run: ls -R
-
 
   release:
     name: Release
@@ -38,4 +30,4 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: rtmuxer
+          files: rtmuxer/rtmuxer
