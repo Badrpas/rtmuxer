@@ -1,4 +1,4 @@
-# rTMUXer
+# rTMUXer ![build](https://github.com/Badrpas/rtmuxer/actions/workflows/build.yml/badge.svg)
 
 Use `yaml` config to define `tmux` sessions and windows layout.
 
