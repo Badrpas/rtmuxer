@@ -1,10 +1,10 @@
-use std::{env, fs::File};
+use std::env;
 
 mod tmux;
 use tmux::*;
 
 mod config;
-use config::Config;
+use config::ConfigEntry;
 
 mod helpers;
 mod errors;
@@ -31,20 +31,13 @@ fn main() {
 }
 
 fn run(config_path: &str) {
-    match std::fs::File::open(config_path) {
-        Err(err) => {
-            println!("Error while reading config: {err}");
-        }
-        Ok(f) => match serde_yaml::from_reader::<File, Config>(f) {
-            Err(err) => {
-                println!("Error while parsing config: {err}");
-            }
-            Ok(conf) => {
-                let conf: Vec<Session> = conf.into();
-                for session in &conf {
-                    if let Err(err) = session.sync() {
-                        println!("{err}");
-                    }
+    match ConfigEntry::load(config_path) {
+        Err(err) => println!("Error while loading config at {config_path}: {err}"),
+        Ok(conf_entry) => {
+            let conf: Vec<Session> = conf_entry.into();
+            for session in &conf {
+                if let Err(err) = session.sync() {
+                    println!("{err}");
                 }
             }
         }

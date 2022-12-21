@@ -1,0 +1,10 @@
+
+
+test cwd:
+  should set cwd from anywhere:
+    cwd: inner
+    cmd: pwd
+  should set cwd to absolu path:
+    cwd: /etc
+    cmd: pwd
+

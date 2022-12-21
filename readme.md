@@ -21,7 +21,7 @@ foo:
 
   # create a window named `bar`
   bar:
-    # set current dir to `/www`
+    # set current dir to `/www`; if not absolute - resolves from config location
     cwd: /www
     # run a command in the window
     cmd: http-server .
