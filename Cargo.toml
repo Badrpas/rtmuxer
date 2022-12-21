@@ -2,6 +2,9 @@
 name = "rtmuxer"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "TMUX session creation from yaml config"
+repository = "https://github.com/badrpas/rtmuxer"
 
 [profile.release]
 opt-level = 's'  # Optimize for size.
