@@ -25,3 +25,12 @@ foo:
     cwd: /
     cmd: ls
 
+multi:
+  line:
+    cmd:
+      echo "this will execute in order"
+
+      echo "using newlines as an ENTER key"
+
+      echo "to run a sequence of commands"
+

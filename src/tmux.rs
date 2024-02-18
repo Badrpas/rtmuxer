@@ -108,18 +108,25 @@ impl Window {
             command.status()?; 
 
             if let Some(cmd) = &self.cmd {
-                Command::new("tmux")
-                    .arg("send-keys")
-                    .arg("-l")
-                    .args(["-t", &self.name])
-                    .arg(cmd)
-                    .status()?;
+                for line in cmd.split('\n') {
+                    if line.is_empty() {
+                        continue;
+                    }
+                    println!("Running command: {line}");
 
-                Command::new("tmux")
-                    .arg("send-keys")
-                    .args(["-t", &self.name])
-                    .arg("ENTER")
-                    .status()?;
+                    Command::new("tmux")
+                        .arg("send-keys")
+                        .arg("-l")
+                        .args(["-t", &self.name])
+                        .arg(line)
+                        .status()?;
+
+                    Command::new("tmux")
+                        .arg("send-keys")
+                        .args(["-t", &self.name])
+                        .arg("ENTER")
+                        .status()?;
+                }
             }
 
             if let Some(keys) = &self.keys {
